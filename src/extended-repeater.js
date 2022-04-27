@@ -19,24 +19,50 @@ const { NotImplementedError } = require('../extensions/index.js');
   //console.log(str);
   addString = "";
   resultString = "";
-  console.log(options.additionSeparator);
-  for (let i = 0; i < options.additionRepeatTimes-1; i++) {
+  emptySeperator = '+';
+  emptyAddSeperator = '|';
+  if(options.addition === undefined) {
+      for(let i = 0; i < options.repeatTimes-1;i++) {
+          resultString += str;
+          if(options.separator === undefined) {
+            resultString += emptySeperator;
+          } else {
+            resultString += options.separator;
+          }  
+      }   
+      resultString += str;
+      return resultString;
+  }
+  //console.log(options.additionSeparator);
+  /************************addition*********************** */
+  for (let i = 0; i < options.additionRepeatTimes-1; i++) {        
       addString += options.addition;
-      addString += options.additionSeparator;  
+      
+      if(options.additionSeparator === undefined) {
+          addString += emptyAddSeperator;   
+      } else {
+          console.log(options.additionSeparator);
+          addString += options.additionSeparator;
+      }  
   }
   addString += options.addition;
-  //console.log(addString);
-  
+  console.log(addString);
   for(let i = 0; i < options.repeatTimes-1;i++) {
       resultString += str;
       resultString += addString;
-      resultString += options.separator;
+      if(options.separator === undefined) {
+          resultString += emptySeperator;
+        } else {
+          resultString += options.separator;
+        }
   }   
   resultString += str;
   resultString += addString;
-  //console.log(resultString);
+  /**********************************************************/
+  console.log(resultString);
   return resultString
 }
+
 
 module.exports = {
   repeater
